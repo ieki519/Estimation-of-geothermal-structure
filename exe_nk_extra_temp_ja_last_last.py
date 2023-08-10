@@ -896,5 +896,5 @@ class LINENotifyBot(object):
             data=payload,
             files=files,
         )
-bot = LINENotifyBot(access_token="Vur0KYsEIKUU7vSpAPsujaFFovHM9a0Olrudcn1xEgG")
-bot.send(f"extra{args.number}:RMSE {np.sqrt(loss_v.data.item())}")
+# bot = LINENotifyBot(access_token="")
+# bot.send(f"extra{args.number}:RMSE {np.sqrt(loss_v.data.item())}")

@@ -1,85 +1,21 @@
-# grad_maxとminをround(-2)へ変更
-# tishitsu_rankに変更
-# grad_max_h_zとgrad_min_h_zを追加
+# メモ
+## フォルダ構成
+- input_japan：インプットフォルダ
+- oupput_japan_last：アウトプットフォルダ（データサイズが大きかったためGIT連携せずGoogleDriveへコピー。実行時こちらのファイル構造を再現しないとエラーが出る。：https://drive.google.com/drive/folders/1Z9EyTl5agupObP1o3WI8Q8LnjfwCZKj_?usp=sharing）
 
-# output_japan_last
-# curie <580にもhyperparameterを付けた
-# 800以下の制限なし
-# hyper param curie (1/10000)から(1/1000)
+## 学習＆結果出力ファイル
+- exe_〇〇ファイル
+  - DNN/NK
+    - exe_dnn_〇〇：DNNモデル
+    - exe_nk_〇〇；NKモデル
+  - 内挿/外挿
+    - exe_{dnn/nk}_inter_〇〇：内挿モデル
+    - exe_{dnn/nk}_extra_〇〇：外挿モデル
 
+＊サフィックスが_lastや_last_lastが最新
 
-# tishitsu rankについて
-# all
-           t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-その他       3.0
-付加体       4.0
-変成岩       5.0
+## 結果出力のみファイル
+- torch__load_〇〇ファイル
+  - torch.load関数でロードモデル選択可能
 
-# inter 0
-            t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-その他       3.0
-変成岩       4.0
-付加体       5.0
-            t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-その他       3.0
-付加体       4.0
-変成岩       5.0
-            t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-その他       3.0
-付加体       4.0
-変成岩       5.0
-            t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-その他       3.0
-付加体       4.0
-変成岩       5.0
-            t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-その他       3.0
-付加体       4.0
-変成岩       5.0
-
-# extra 0
-            t
-group_ja     
-火成岩       1.0
-堆積岩       2.0
-付加体       3.0
-その他       4.0
-変成岩       5.0
-
-```python
-if "tishitsu_rank" in name:
-    tishitsu_rank_dict = train_data.groupby("group_ja").mean()[["t"]].rank(ascending=False).to_dict()["t"]
-    train_data["group_rank"]=train_data["group_ja"].replace(tishitsu_rank_dict)
-    test_data["group_rank"]=test_data["group_ja"].replace(tishitsu_rank_dict)
-    est_data["group_rank"]=est_data["group_ja"].replace(tishitsu_rank_dict)
-    curie_data["group_rank"]=curie_data["group_ja"].replace(tishitsu_rank_dict)
-    curie_data_580_ika["group_rank"]=curie_data_580_ika["group_ja"].replace(tishitsu_rank_dict)
-    curie_data_580_izyou["group_rank"]=curie_data_580_izyou["group_ja"].replace(tishitsu_rank_dict)
-```
-
-# 0,1やっている
-
-# PIやりなおし
-
-extra lastでdepth800の考慮なし
-grad_max がrandom forest出力
-grad でもdepth800の考慮なし
-PIは80でとりあえず作成
+＊サフィックスが_lastが最新
